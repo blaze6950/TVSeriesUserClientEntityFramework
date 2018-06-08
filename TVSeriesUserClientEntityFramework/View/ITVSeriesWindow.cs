@@ -6,5 +6,7 @@ namespace TVSeriesUserClientEntityFramework.View
     {
         ComboBox AllComboBoxFind { get; set; }
         ListView AllListTvSeries { get; set; }
+        ComboBox FavouriteComboBoxFind { get; set; }
+        ListView FavouriteListTvSeries { get; set; }
     }
 }

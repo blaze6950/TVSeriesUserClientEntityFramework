@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TVSeriesUserClientEntityFramework"
         mc:Ignorable="d"
-        Title="TVSeriesWindow" Height="544.138" Width="800">
+        Title="TVSeriesWindow" Height="544.138" Width="817.586">
     <Grid>
         <TabControl>
             <TabItem x:Name="AllTVSeriesList">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <Ellipse Height="10" Width="10" Fill="Black" />
+                        <Ellipse Height="10" Width="10" Fill="#B0FF17" />
                         <TextBlock Margin="3">Все сериалы</TextBlock>
                     </StackPanel>
                 </TabItem.Header>
@@ -30,6 +30,71 @@
                             <Button Margin="5" Grid.Column="1" Click="AllButtonFind_Click">Find</Button>
                         </Grid>
                         <ListView Name="ListTvSeries" Margin="5" Grid.Row="1" MouseDoubleClick="AllMyListView_MouseDoubleClick">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Image" Width="110">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Image Source="{Binding Image}" Stretch="UniformToFill" Width="100" Height="100" HorizontalAlignment="Center" VerticalAlignment="Center"></Image>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Name" Width="200">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Name}" TextAlignment="Center" FontSize="24" Width="200"></TextBlock>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Year" Width="150">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Year}" TextAlignment="Center" FontSize="24" Width="150"></TextBlock>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Channel" Width="150">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Channel.Name}" TextAlignment="Center" FontSize="24" Width="150"></TextBlock>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Rating" Width="150">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding AverageRating}" TextAlignment="Center" FontSize="24" Width="150"></TextBlock>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem x:Name="FavTVSeriesList">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="favorite.png" Stretch="UniformToFill" Height="15"/>
+                        <TextBlock Margin="3">Избранные</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <Grid Grid.Row="1" Grid.Column="1" Name="FavGridTVSeriesPanel">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="7*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Margin="5" Background="#FFE2E2E2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5*"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <ComboBox Margin="5" IsEditable="True" Grid.Column="0" Name="FavComboBoxFind" KeyUp="AllComboBoxFind_TextInput" IsTextSearchEnabled="False" IsSynchronizedWithCurrentItem="False"></ComboBox>
+                            <Button Margin="5" Grid.Column="1" Click="AllButtonFind_Click">Find</Button>
+                        </Grid>
+                        <ListView Name="FavListTvSeries" Margin="5" Grid.Row="1" MouseDoubleClick="AllMyListView_MouseDoubleClick">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Header="Image" Width="110">

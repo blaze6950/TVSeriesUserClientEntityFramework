@@ -20,6 +20,7 @@ namespace TVSeriesUserClientEntityFramework.Presenter
         public void LoadList()
         {
             _view.AllListTvSeries.ItemsSource = (from tv in _model.TVSeriesTables select tv).ToList();
+            _view.
         }
 
         public void ButtonFind_Click()
