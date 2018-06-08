@@ -43,17 +43,17 @@ namespace TVSeriesUserClientEntityFramework
 
         private void ButtonLogin_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            _presenter.LoginClick();
         }
 
         private void TextBlockNotYetRegistered_OnMouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
-            throw new NotImplementedException();
+            _presenter.NotYetRegisteredClick();
         }
 
         private void TextBlockForgetPassword_OnMouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
-            throw new NotImplementedException();
+            _presenter.ForgetPasswordClick();
         }
 
         public TextBox Email { get => TextBoxEmail; set => TextBoxEmail = value; }
