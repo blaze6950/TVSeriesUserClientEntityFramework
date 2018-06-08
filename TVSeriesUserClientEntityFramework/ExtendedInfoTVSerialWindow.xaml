@@ -46,7 +46,14 @@
             <TextBlock Grid.Row="1" Margin="5" Name="DescriptionTB" TextWrapping="WrapWithOverflow" IsEnabled="False"></TextBlock>
         </Grid>
         <DockPanel Grid.Column="1" LastChildFill="True">
-            
+            <GroupBox Header="Rating:" DockPanel.Dock="Top">
+                <local:Rating></local:Rating>
+            </GroupBox>
+            <TextBox DockPanel.Dock="Top"></TextBox>
+            <Button DockPanel.Dock="Top">Send</Button>
+            <ListView>
+                
+            </ListView>
         </DockPanel>
     </Grid>
 </Window>

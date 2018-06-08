@@ -35,7 +35,8 @@ namespace TVSeriesUserClientEntityFramework.Presenter
 
         public void ListViewMouseDoubleClick(TVSeriesTable item)
         {
-            throw new System.NotImplementedException();
+            var extendedInfo = new ExtendedInfoTVSerialWindow();
+            extendedInfo.ShowDialog();
         }
     }
 }

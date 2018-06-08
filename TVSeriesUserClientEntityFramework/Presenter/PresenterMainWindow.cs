@@ -26,7 +26,6 @@ namespace TVSeriesUserClientEntityFramework.Presenter
             {
                 if (CheckLogin())
                 {
-                    //create new window...
                     MessageBox.Show("Load data...", "Please wait!", MessageBoxButton.OK,
                         MessageBoxImage.Exclamation);
                     TVSeriesWindow tvSeriesWindow = new TVSeriesWindow(_model, _currentUser);
