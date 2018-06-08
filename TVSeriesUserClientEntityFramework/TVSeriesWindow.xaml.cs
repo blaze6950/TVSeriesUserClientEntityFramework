@@ -24,5 +24,20 @@ namespace TVSeriesUserClientEntityFramework
         {
             InitializeComponent();
         }
+
+        private void AllComboBoxFind_TextInput(object sender, KeyEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void AllButtonFind_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void AllMyListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

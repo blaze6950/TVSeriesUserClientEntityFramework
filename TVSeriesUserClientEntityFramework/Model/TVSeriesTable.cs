@@ -1,3 +1,5 @@
+using System.Linq;
+
 namespace TVSeriesUserClientEntityFramework
 {
     using System;
@@ -35,6 +37,15 @@ namespace TVSeriesUserClientEntityFramework
         public string Desription { get; set; }
 
         public int Channel_Id { get; set; }
+
+        [NotMapped]
+        public double AverageRating
+        {
+            get
+            {
+                return Ratings.AsQueryable().Average(r => r.Mark);
+            }
+        }
 
         public virtual Channel Channel { get; set; }
 
