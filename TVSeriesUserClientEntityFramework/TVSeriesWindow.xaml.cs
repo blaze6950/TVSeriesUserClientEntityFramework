@@ -49,7 +49,7 @@ namespace TVSeriesUserClientEntityFramework
         public ComboBox AllComboBoxFind { get => ComboBoxFind; set => ComboBoxFind = value; }
         public ListView AllListTvSeries { get => ListTvSeries; set => ListTvSeries = value; }
         public ComboBox FavouriteComboBoxFind { get => FavComboBoxFind; set => FavComboBoxFind = value; }
-        public ListView FavouriteListTvSeries { get => FavouriteListTvSeries; set => FavouriteListTvSeries = value; }
+        public ListView FavouriteListTvSeries { get => FavListTvSeries; set => FavListTvSeries = value; }
     }
 }
 
