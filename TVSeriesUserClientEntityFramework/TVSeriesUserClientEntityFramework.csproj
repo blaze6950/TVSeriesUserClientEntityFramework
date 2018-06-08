@@ -70,6 +70,8 @@
     <Compile Include="Model\TVSeriesModel.cs" />
     <Compile Include="Model\TVSeriesTable.cs" />
     <Compile Include="Model\User.cs" />
+    <Compile Include="Presenter\IPresenterTVSeriesWindow.cs" />
+    <Compile Include="Presenter\PresenterTVSeriesWindow.cs" />
     <Compile Include="TVSeriesWindow.xaml.cs">
       <DependentUpon>TVSeriesWindow.xaml</DependentUpon>
     </Compile>
