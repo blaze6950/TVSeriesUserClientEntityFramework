@@ -55,7 +55,9 @@ namespace TVSeriesUserClientEntityFramework.Presenter
 
         public void ForgetPasswordClick()
         {
-            throw new NotImplementedException();
+            //add code for restore password...
+            MessageBox.Show("Unfortunately, this function is not available ... We are working on it! We apologize for the inconvenience!", "Sorry...", MessageBoxButton.OK,
+                MessageBoxImage.Exclamation);
         }
 
         private bool CheckLogin()
