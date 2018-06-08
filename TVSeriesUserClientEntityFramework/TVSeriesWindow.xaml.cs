@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TVSeriesUserClientEntityFramework.Presenter;
 using TVSeriesUserClientEntityFramework.View;
 
 namespace TVSeriesUserClientEntityFramework
@@ -20,24 +21,33 @@ namespace TVSeriesUserClientEntityFramework
     /// </summary>
     public partial class TVSeriesWindow : Window, ITVSeriesWindow
     {
-        public TVSeriesWindow()
+        private IPresenterTVSeriesWindow _presenter;
+        public TVSeriesWindow(TVSeriesModel model, User currentUser)
         {
             InitializeComponent();
+            _presenter = new PresenterTVSeriesWindow(this, model, currentUser);
         }
 
         private void AllComboBoxFind_TextInput(object sender, KeyEventArgs e)
         {
-            throw new NotImplementedException();
+            if (ComboBoxFind.Text.Length > 0)
+            {
+                _presenter.ComboBoxFind_TextInput(ComboBoxFind.Text);
+            }
         }
 
         private void AllButtonFind_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            _presenter.ButtonFind_Click();
         }
 
         private void AllMyListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            throw new NotImplementedException();
+            _presenter.ListViewMouseDoubleClick((TVSeriesTable)ListTvSeries.SelectedItem);
         }
+
+        public ComboBox AllComboBoxFind { get => ComboBoxFind; set => ComboBoxFind = value; }
+        public ListView AllListTvSeries { get => ListTvSeries; set => ListTvSeries = value; }
     }
 }
+

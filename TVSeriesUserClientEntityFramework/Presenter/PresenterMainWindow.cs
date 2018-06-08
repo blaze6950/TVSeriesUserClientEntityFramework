@@ -13,6 +13,7 @@ namespace TVSeriesUserClientEntityFramework.Presenter
         private IViewMainWindow _view;
         private TVSeriesModel _model;
         private bool _isLogin = true;
+        private User _currentUser;
         public PresenterMainWindow(IViewMainWindow view)
         {
             _view = view;
@@ -28,6 +29,9 @@ namespace TVSeriesUserClientEntityFramework.Presenter
                     //create new window...
                     MessageBox.Show("Load data...", "Please wait!", MessageBoxButton.OK,
                         MessageBoxImage.Exclamation);
+                    TVSeriesWindow tvSeriesWindow = new TVSeriesWindow(_model, _currentUser);
+                    tvSeriesWindow.Show();
+                    _view.MainWindowLogin.Close();
                 }
                 else
                 {
@@ -62,12 +66,12 @@ namespace TVSeriesUserClientEntityFramework.Presenter
 
         private bool CheckLogin()
         {
-            var user = _model.Users.DefaultIfEmpty(null).SingleOrDefault(u => u.Email.Equals(_view.Email.Text));
-            if (user == null)
+            _currentUser = _model.Users.DefaultIfEmpty(null).SingleOrDefault(u => u.Email.Equals(_view.Email.Text));
+            if (_currentUser == null)
             {
                 return false;
             }
-            if (user.Password.Equals(_view.Password.Password))
+            if (_currentUser.Password.Equals(_view.Password.Password))
             {
                 return true;
             }

@@ -43,7 +43,7 @@ namespace TVSeriesUserClientEntityFramework
         {
             get
             {
-                return Ratings.AsQueryable().Average(r => r.Mark);
+                return Ratings.AsQueryable().DefaultIfEmpty(null).Average(r => r.Mark);
             }
         }
 
