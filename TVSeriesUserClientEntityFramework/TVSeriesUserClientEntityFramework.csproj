@@ -77,8 +77,8 @@
     <Compile Include="Model\User.cs" />
     <Compile Include="Presenter\IPresenterTVSeriesWindow.cs" />
     <Compile Include="Presenter\PresenterTVSeriesWindow.cs" />
-    <Compile Include="Rating.xaml.cs">
-      <DependentUpon>Rating.xaml</DependentUpon>
+    <Compile Include="RatingUC.xaml.cs">
+      <DependentUpon>RatingUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="TVSeriesWindow.xaml.cs">
       <DependentUpon>TVSeriesWindow.xaml</DependentUpon>
@@ -101,7 +101,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Rating.xaml">
+    <Page Include="RatingUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

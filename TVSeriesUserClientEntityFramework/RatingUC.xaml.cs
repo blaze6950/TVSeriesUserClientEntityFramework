@@ -16,14 +16,14 @@ using System.Windows.Shapes;
 namespace TVSeriesUserClientEntityFramework
 {
     /// <summary>
-    /// Interaction logic for Rating.xaml
+    /// Interaction logic for RatingUC.xaml
     /// </summary>
-    public partial class Rating : UserControl
+    public partial class RatingUC : UserControl
     {
         int intRate = 0;
         int intCount = 1;
         int Rate = 0;
-        public Rating()
+        public RatingUC()
         {
             InitializeComponent();
             LoadImages();
