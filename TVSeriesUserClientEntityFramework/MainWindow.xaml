@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TVSeriesUserClientEntityFramework"
         mc:Ignorable="d"
-        Title="MainWindow" Height="277.241" Width="417.241">
+        Title="MainWindow" Height="197.574" Width="231.776">
     <Grid>
-        
+
     </Grid>
 </Window>
