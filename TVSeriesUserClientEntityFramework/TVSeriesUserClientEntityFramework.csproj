@@ -73,6 +73,7 @@
     <Compile Include="TVSeriesWindow.xaml.cs">
       <DependentUpon>TVSeriesWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ITVSeriesWindow.cs" />
     <Compile Include="View\IViewMainWindow.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
