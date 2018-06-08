@@ -5,8 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TVSeriesUserClientEntityFramework"
         mc:Ignorable="d"
-        Title="MainWindow" Height="197.574" Width="231.776">
+        Title="Login" Height="262.413" Width="365.95" ResizeMode="NoResize">
     <Grid>
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
 
+            <DockPanel LastChildFill="True" Margin="5" Grid.Row="0">
+                <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center" Margin="29 0 0 0" FontSize="16">Email:</TextBlock>
+                <TextBox DockPanel.Dock="Right" Name="TextBoxEmail" MaxLines="1" MaxLength="500" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16"/>
+            </DockPanel>
+
+            <DockPanel LastChildFill="True" Margin="5" Grid.Row="1">
+                <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center" FontSize="16">Password:</TextBlock>
+                <PasswordBox DockPanel.Dock="Right" Name="PasswordBox" MaxLength="100"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16"></PasswordBox>
+            </DockPanel>
+
+            <Button Grid.Row="2" Margin="5 5 5 2" Name="ButtonLogin" Click="ButtonLogin_OnClick" FontSize="16">Login</Button>
+
+            <StackPanel Grid.Row="3" Margin="5 2 5 0" Orientation="Vertical">
+                <TextBlock HorizontalAlignment="Center" FontSize="16" Foreground="#FF0039FB" Name="TextBlockNotYetRegistered" MouseEnter="TextBlock_OnMouseEnter" MouseLeave="TextBlock_OnMouseLeave" MouseRightButtonUp="TextBlockNotYetRegistered_OnMouseRightButtonUp">Not yet registered?</TextBlock>
+                <TextBlock HorizontalAlignment="Center" FontSize="16" Foreground="#FF0039FB" Name="TextBlockForgetPassword" MouseEnter="TextBlock_OnMouseEnter" MouseLeave="TextBlock_OnMouseLeave" MouseRightButtonUp="TextBlockForgetPassword_OnMouseRightButtonUp">Forget password...</TextBlock>
+            </StackPanel>
+
+        </Grid>
     </Grid>
 </Window>
