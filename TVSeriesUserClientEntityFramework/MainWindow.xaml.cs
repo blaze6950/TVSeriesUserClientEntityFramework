@@ -47,6 +47,11 @@ namespace TVSeriesUserClientEntityFramework
             {
                 _presenter.LoginClick();
             }
+            else
+            {
+                MessageBox.Show("Please enter email and password!", "Ooops...", MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            }
         }
 
         private void TextBlockNotYetRegistered_OnMouseRightButtonUp(object sender, MouseButtonEventArgs e)
@@ -63,5 +68,7 @@ namespace TVSeriesUserClientEntityFramework
         public PasswordBox Password { get => PasswordBox; set => PasswordBox = value; }
         public Button Login { get => ButtonLogin; set => ButtonLogin = value; }
         public MainWindow MainWindowLogin { get => this;}
+        public TextBlock NotYetRegistered { get => TextBlockNotYetRegistered; set => TextBlockNotYetRegistered = value; }
+        public TextBlock ForgotPassword { get => TextBlockForgetPassword; set => TextBlockForgetPassword = value; }
     }
 }

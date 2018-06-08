@@ -9,5 +9,7 @@ namespace TVSeriesUserClientEntityFramework.View
         PasswordBox Password { get; set; }
         Button Login { get; set; }
         MainWindow MainWindowLogin { get;} 
+        TextBlock NotYetRegistered { get; set; }
+        TextBlock ForgotPassword { get; set; }
     }
 }

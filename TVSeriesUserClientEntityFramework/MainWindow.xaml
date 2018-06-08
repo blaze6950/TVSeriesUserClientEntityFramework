@@ -28,8 +28,8 @@
             <Button Grid.Row="2" Margin="5 5 5 2" Name="ButtonLogin" Click="ButtonLogin_OnClick" FontSize="16">Login</Button>
 
             <StackPanel Grid.Row="3" Margin="5 2 5 0" Orientation="Vertical">
-                <TextBlock HorizontalAlignment="Center" FontSize="16" Foreground="#FF0039FB" Name="TextBlockNotYetRegistered" MouseEnter="TextBlock_OnMouseEnter" MouseLeave="TextBlock_OnMouseLeave" MouseRightButtonUp="TextBlockNotYetRegistered_OnMouseRightButtonUp">Not yet registered?</TextBlock>
-                <TextBlock HorizontalAlignment="Center" FontSize="16" Foreground="#FF0039FB" Name="TextBlockForgetPassword" MouseEnter="TextBlock_OnMouseEnter" MouseLeave="TextBlock_OnMouseLeave" MouseRightButtonUp="TextBlockForgetPassword_OnMouseRightButtonUp">Forget password...</TextBlock>
+                <TextBlock HorizontalAlignment="Center" FontSize="16" Foreground="#FF0039FB" Name="TextBlockNotYetRegistered" MouseEnter="TextBlock_OnMouseEnter" MouseLeave="TextBlock_OnMouseLeave" MouseLeftButtonUp="TextBlockNotYetRegistered_OnMouseRightButtonUp">Not yet registered?</TextBlock>
+                <TextBlock HorizontalAlignment="Center" FontSize="16" Foreground="#FF0039FB" Name="TextBlockForgetPassword" MouseEnter="TextBlock_OnMouseEnter" MouseLeave="TextBlock_OnMouseLeave" MouseLeftButtonUp="TextBlockForgetPassword_OnMouseRightButtonUp">Forget password...</TextBlock>
             </StackPanel>
 
         </Grid>
