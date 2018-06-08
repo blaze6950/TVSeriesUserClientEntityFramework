@@ -1,0 +1,52 @@
+﻿<Window x:Class="TVSeriesUserClientEntityFramework.ExtendedInfoTVSerialWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TVSeriesUserClientEntityFramework"
+        mc:Ignorable="d"
+        Title="ExtendedInfoTVSerialWindow" Height="474.828" Width="740">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="7*"></RowDefinition>
+                <RowDefinition Height="5*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <DockPanel LastChildFill="True">
+                    <Button Name="ButtonFavourite" DockPanel.Dock="Top" Height="40" Click="ButtonFavourite_OnClick">Add to favourite</Button>
+                    <Image  Name="Image" Source="placeholder.png" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </DockPanel>
+                <ScrollViewer Grid.Column="1">
+                    <StackPanel>
+                        <TextBlock Margin="5" Name="NameTB" IsEnabled="False" AutomationProperties.HelpText="Name" ToolTip="Name"/>
+                        <GroupBox Header="Channel:">
+                            <TextBlock Name="ChannelTB" Margin="0 3 0 3"></TextBlock>
+                        </GroupBox>
+                        <GroupBox Header="Genre:">
+                            <ListBox Name="GenreTB" IsEnabled="False" Margin="0 3 0 3"></ListBox>
+                        </GroupBox>
+                        <GroupBox Header="Year:">
+                            <TextBlock Name="YearTB" IsEnabled="False" Margin="0 3 0 3" AutomationProperties.HelpText="Year" ToolTip="Year"></TextBlock>
+                        </GroupBox>
+                        <GroupBox Header="Number of seasons:">
+                            <TextBlock Name="SeasonsTB" IsEnabled="False" Margin="0 3 0 3" AutomationProperties.HelpText="Number of seasons" ToolTip="Number of seasons"></TextBlock>
+                        </GroupBox>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+            <TextBlock Grid.Row="1" Margin="5" Name="DescriptionTB" TextWrapping="WrapWithOverflow" IsEnabled="False"></TextBlock>
+        </Grid>
+        <DockPanel Grid.Column="1" LastChildFill="True">
+            
+        </DockPanel>
+    </Grid>
+</Window>
