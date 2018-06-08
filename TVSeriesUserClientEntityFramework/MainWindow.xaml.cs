@@ -55,5 +55,10 @@ namespace TVSeriesUserClientEntityFramework
         {
             throw new NotImplementedException();
         }
+
+        public TextBox Email { get => TextBoxEmail; set => TextBoxEmail = value; }
+        public PasswordBox Password { get => PasswordBox; set => PasswordBox = value; }
+        public Button Login { get => ButtonLogin; set => ButtonLogin = value; }
+        public MainWindow MainWindowLogin { get => this;}
     }
 }
