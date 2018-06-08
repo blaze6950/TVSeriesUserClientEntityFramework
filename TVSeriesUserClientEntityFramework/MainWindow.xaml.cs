@@ -43,7 +43,10 @@ namespace TVSeriesUserClientEntityFramework
 
         private void ButtonLogin_OnClick(object sender, RoutedEventArgs e)
         {
-            _presenter.LoginClick();
+            if (TextBoxEmail.Text.Length > 0 && PasswordBox.Password.Length > 0)
+            {
+                _presenter.LoginClick();
+            }
         }
 
         private void TextBlockNotYetRegistered_OnMouseRightButtonUp(object sender, MouseButtonEventArgs e)
