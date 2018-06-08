@@ -12,27 +12,26 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TVSeriesUserClientEntityFramework.Presenter;
+using TVSeriesUserClientEntityFramework.View;
 
 namespace TVSeriesUserClientEntityFramework
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, IViewMainWindow
     {
+        private IPresenterMainWindow _presenter;
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        private void ButtonLogin_OnClick(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
+            _presenter = new PresenterMainWindow(this);
         }
 
         private void TextBlock_OnMouseEnter(object sender, MouseEventArgs e)
         {
-            var textBlock = (TextBlock) sender;
+            var textBlock = (TextBlock)sender;
             textBlock.TextDecorations = System.Windows.TextDecorations.Underline;
         }
 
@@ -40,6 +39,11 @@ namespace TVSeriesUserClientEntityFramework
         {
             var textBlock = (TextBlock)sender;
             textBlock.TextDecorations = null;
+        }
+
+        private void ButtonLogin_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void TextBlockNotYetRegistered_OnMouseRightButtonUp(object sender, MouseButtonEventArgs e)
