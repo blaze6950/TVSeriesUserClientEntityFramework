@@ -29,11 +29,6 @@ namespace TVSeriesUserClientEntityFramework
             _presenter = new PresenterExtendedInfoTVSerialWindow(currentUser, model, this, item);
         }
 
-        private void ButtonFavourite_OnClick(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         public RatingUC RatingUserControl { get => PickerRating; set => PickerRating = value; }
         public Button Favourite { get => ButtonFavourite; set => ButtonFavourite = value; }
         public ExtendedInfoTVSerialWindow ExtendedInfoTvSerialWindowProperty { get => this; }
@@ -50,6 +45,21 @@ namespace TVSeriesUserClientEntityFramework
         private void ListViewComments_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             _presenter.ListViewMouseDoubleClick((Comment)ListViewComments.SelectedItem);
+        }
+
+        private void ButtonFavourite_OnMouseEnter(object sender, MouseEventArgs e)
+        {
+            _presenter.ListViewMouseEnter();
+        }
+
+        private void ButtonFavourite_OnMouseLeave(object sender, MouseEventArgs e)
+        {
+            _presenter.ListViewMouseLeave();
+        }
+
+        private void ButtonFavourite_OnClick(object sender, RoutedEventArgs e)
+        {
+            _presenter.FavouriteButtonClick();
         }
     }
 }

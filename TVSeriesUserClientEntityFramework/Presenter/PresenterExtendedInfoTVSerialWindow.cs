@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Forms;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using TVSeriesUserClientEntityFramework.View;
 using MessageBox = System.Windows.MessageBox;
@@ -14,6 +15,7 @@ namespace TVSeriesUserClientEntityFramework.Presenter
         private IViewExtendedInfoTVSerialWindow _view;
         private User _currentUser;
         private TVSeriesTable _currenTvSeriesTable;
+        private bool _isFavourite;
 
         public PresenterExtendedInfoTVSerialWindow(User currentUser, TVSeriesModel model, IViewExtendedInfoTVSerialWindow view, TVSeriesTable currenTvSeriesTable)
         {
@@ -38,6 +40,19 @@ namespace TVSeriesUserClientEntityFramework.Presenter
             _view.ExtendedInfoTvSerialWindowProperty.SeasonsTB.Text = _currenTvSeriesTable.Seasons.ToString();
             _view.ExtendedInfoTvSerialWindowProperty.YearTB.Text = _currenTvSeriesTable.YearOfIssue.ToString();
             _view.ExtendedInfoTvSerialWindowProperty.ListViewComments.ItemsSource = _currenTvSeriesTable.Comments.ToList();
+
+            if (_currentUser.TVSeriesTables.Contains(_currenTvSeriesTable))
+            {
+                _view.ExtendedInfoTvSerialWindowProperty.ButtonFavourite.Background = Brushes.ForestGreen;
+                _view.ExtendedInfoTvSerialWindowProperty.ButtonFavourite.Content = "Favourite!";
+                _isFavourite = true;
+            }
+            else
+            {
+                _view.ExtendedInfoTvSerialWindowProperty.ButtonFavourite.Background = Brushes.Gray;
+                _view.ExtendedInfoTvSerialWindowProperty.ButtonFavourite.Content = "Add to favourite";
+                _isFavourite = false;
+            }
         }
 
         public void SendComment(string text)
@@ -48,7 +63,7 @@ namespace TVSeriesUserClientEntityFramework.Presenter
 
         public void ListViewMouseDoubleClick(Comment selectedComment)
         {
-            var res = MessageBox.Show($"Do u want delete this comment: \"{selectedComment.TextComment}\"?",
+            var res = MessageBox.Show($"Do u want delete this comment: \n-----\"{selectedComment.TextComment}\" ?",
                 "Are u sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (res == MessageBoxResult.Yes)
             {
@@ -56,6 +71,52 @@ namespace TVSeriesUserClientEntityFramework.Presenter
             }
             _view.ExtendedInfoTvSerialWindowProperty.ListViewComments.ItemsSource = _currenTvSeriesTable.Comments.ToList();
             MessageBox.Show("Comment deleted successfully!", "Done!");
+        }
+
+        public void FavouriteButtonClick()
+        {
+            if (!_isFavourite)
+            {
+                _currentUser.TVSeriesTables.Add(_currenTvSeriesTable);
+                _view.ExtendedInfoTvSerialWindowProperty.ButtonFavourite.Background = Brushes.ForestGreen;
+                _view.ExtendedInfoTvSerialWindowProperty.ButtonFavourite.Content = "Favourite!";
+                _isFavourite = true;
+            }
+            else
+            {
+                _currentUser.TVSeriesTables.Remove(_currenTvSeriesTable);
+                _view.ExtendedInfoTvSerialWindowProperty.ButtonFavourite.Background = Brushes.Gray;
+                _view.ExtendedInfoTvSerialWindowProperty.ButtonFavourite.Content = "Add to favourite";
+                _isFavourite = false;
+            }
+        }
+
+        public void ListViewMouseEnter()
+        {
+            if (_isFavourite)
+            {
+                _view.ExtendedInfoTvSerialWindowProperty.ButtonFavourite.Background = Brushes.DarkRed;
+                _view.ExtendedInfoTvSerialWindowProperty.ButtonFavourite.Content = "Delete from favourites?";
+            }
+            else
+            {
+                _view.ExtendedInfoTvSerialWindowProperty.ButtonFavourite.Background = Brushes.Aquamarine;
+                _view.ExtendedInfoTvSerialWindowProperty.ButtonFavourite.Content = "Add to favourite?";
+            }
+        }
+
+        public void ListViewMouseLeave()
+        {
+            if (_isFavourite)
+            {
+                _view.ExtendedInfoTvSerialWindowProperty.ButtonFavourite.Background = Brushes.ForestGreen;
+                _view.ExtendedInfoTvSerialWindowProperty.ButtonFavourite.Content = "Favourite!";
+            }
+            else
+            {
+                _view.ExtendedInfoTvSerialWindowProperty.ButtonFavourite.Background = Brushes.Gray;
+                _view.ExtendedInfoTvSerialWindowProperty.ButtonFavourite.Content = "Add to favourite";
+            }
         }
     }
 }

@@ -22,7 +22,7 @@
                     <ColumnDefinition Width="2*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <DockPanel LastChildFill="True">
-                    <Button Name="ButtonFavourite" DockPanel.Dock="Top" Height="40" Click="ButtonFavourite_OnClick">Add to favourite</Button>
+                    <Button Name="ButtonFavourite" DockPanel.Dock="Top" Height="40" Click="ButtonFavourite_OnClick" MouseEnter="ButtonFavourite_OnMouseEnter" MouseLeave="ButtonFavourite_OnMouseLeave">Add to favourite</Button>
                     <Image  Name="Image" Source="placeholder.png" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </DockPanel>
                 <ScrollViewer Grid.Column="1">
