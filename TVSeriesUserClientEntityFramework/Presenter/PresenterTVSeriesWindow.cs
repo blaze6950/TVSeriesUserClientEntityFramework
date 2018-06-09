@@ -38,6 +38,7 @@ namespace TVSeriesUserClientEntityFramework.Presenter
             var extendedInfo = new ExtendedInfoTVSerialWindow(_model, _currentUser, item);
             extendedInfo.ShowDialog();
             _model.SaveChanges();
+            LoadList();
         }
     }
 }

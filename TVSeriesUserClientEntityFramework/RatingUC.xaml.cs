@@ -61,13 +61,14 @@ namespace TVSeriesUserClientEntityFramework
 
         private void LoadRating()
         {
-            var oldRating = TvSeriesTable.Ratings.DefaultIfEmpty(null).Single(r => r.Id_User == CurrentUser.id);
+            var oldRating = TvSeriesTable.Ratings.DefaultIfEmpty(null).SingleOrDefault(r => r?.Id_User == CurrentUser.id);
             if (oldRating != null)
             {
                 Rate = oldRating.Mark;
                 intRate = Rate;
                 SetRating();
                 lblRating.Text = TvSeriesTable.AverageRating.ToString();
+                SetImage(Rate, Visibility.Visible, Visibility.Hidden);
             }
         }
 
@@ -153,7 +154,11 @@ namespace TVSeriesUserClientEntityFramework
 
         private void SetRating()
         {
-            var oldRating = TvSeriesTable.Ratings.DefaultIfEmpty(null).Single(r => r.Id_User == CurrentUser.id);
+            Rating oldRating = null;
+            if (TvSeriesTable.Ratings.Count > 0)
+            {
+                oldRating = TvSeriesTable.Ratings.DefaultIfEmpty(null).Single(r => r.Id_User == CurrentUser.id);
+            }
             if (oldRating == null)
             {
                 TvSeriesTable.Ratings.Add(new Rating()
