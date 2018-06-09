@@ -49,25 +49,27 @@
             <GroupBox Header="Rating:" DockPanel.Dock="Top">
                 <local:RatingUC x:Name="PickerRating"></local:RatingUC>
             </GroupBox>
-            <TextBox DockPanel.Dock="Top" TextWrapping="WrapWithOverflow" Height="30"></TextBox>
-            <Button DockPanel.Dock="Top">Send</Button>
-            <ListView Name="ListViewComments">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="Comments" Width="230">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Vertical">
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="{Binding AverageRating}" TextAlignment="Center" FontSize="24" Width="150"></TextBlock>
+            <TextBox DockPanel.Dock="Top" TextWrapping="WrapWithOverflow" Height="Auto" MinHeight="30" Name="TextBoxTextComment"></TextBox>
+            <Button DockPanel.Dock="Top" Click="SendCommentButton_OnClick">Send</Button>
+            <ScrollViewer DockPanel.Dock="Top">
+                <ListView Name="ListViewComments" MouseDoubleClick="ListViewComments_OnMouseDoubleClick">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Comments" Width="210">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Vertical">
+                                            <GroupBox Header="{Binding User.Email}">
+                                                <TextBlock Text="{Binding TextComment}" TextWrapping="WrapWithOverflow" TextAlignment="Left" FontSize="16"></TextBlock>
+                                            </GroupBox>
                                         </StackPanel>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                    </GridView>
-                </ListView.View>
-            </ListView>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </ScrollViewer>
         </DockPanel>
     </Grid>
 </Window>

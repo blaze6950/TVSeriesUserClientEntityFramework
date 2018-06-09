@@ -21,7 +21,7 @@ namespace TVSeriesUserClientEntityFramework
     /// </summary>
     public partial class ExtendedInfoTVSerialWindow : Window, IViewExtendedInfoTVSerialWindow
     {
-        private PresenterExtendedInfoTVSerialWindow _presenter;
+        private IPresenterExtendedInfoTVSerialWindow _presenter;
 
         public ExtendedInfoTVSerialWindow(TVSeriesModel model, User currentUser, TVSeriesTable item)
         {
@@ -37,5 +37,19 @@ namespace TVSeriesUserClientEntityFramework
         public RatingUC RatingUserControl { get => PickerRating; set => PickerRating = value; }
         public Button Favourite { get => ButtonFavourite; set => ButtonFavourite = value; }
         public ExtendedInfoTVSerialWindow ExtendedInfoTvSerialWindowProperty { get => this; }
+
+        private void SendCommentButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (TextBoxTextComment.Text.Length > 0 && TextBoxTextComment.Text.Length < 1000)
+            {
+                _presenter.SendComment(TextBoxTextComment.Text);
+                TextBoxTextComment.Text = "";
+            }
+        }
+
+        private void ListViewComments_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            _presenter.ListViewMouseDoubleClick((Comment)ListViewComments.SelectedItem);
+        }
     }
 }

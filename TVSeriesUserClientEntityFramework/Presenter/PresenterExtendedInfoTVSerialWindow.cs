@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Linq;
+using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Media.Imaging;
 using TVSeriesUserClientEntityFramework.View;
+using MessageBox = System.Windows.MessageBox;
 
 namespace TVSeriesUserClientEntityFramework.Presenter
 {
@@ -34,6 +37,25 @@ namespace TVSeriesUserClientEntityFramework.Presenter
             _view.ExtendedInfoTvSerialWindowProperty.GenreTB.ItemsSource = (from g in _currenTvSeriesTable.Genres select g.Name).ToList();
             _view.ExtendedInfoTvSerialWindowProperty.SeasonsTB.Text = _currenTvSeriesTable.Seasons.ToString();
             _view.ExtendedInfoTvSerialWindowProperty.YearTB.Text = _currenTvSeriesTable.YearOfIssue.ToString();
+            _view.ExtendedInfoTvSerialWindowProperty.ListViewComments.ItemsSource = _currenTvSeriesTable.Comments.ToList();
+        }
+
+        public void SendComment(string text)
+        {
+            _currenTvSeriesTable.Comments.Add(new Comment(){Id_TVSerial = _currenTvSeriesTable.Id, Id_User = _currentUser.id, TextComment = text, User = _currentUser, TVSeriesTable = _currenTvSeriesTable});
+            _view.ExtendedInfoTvSerialWindowProperty.ListViewComments.ItemsSource = _currenTvSeriesTable.Comments.ToList();
+        }
+
+        public void ListViewMouseDoubleClick(Comment selectedComment)
+        {
+            var res = MessageBox.Show($"Do u want delete this comment: \"{selectedComment.TextComment}\"?",
+                "Are u sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (res == MessageBoxResult.Yes)
+            {
+                _currenTvSeriesTable.Comments.Remove(selectedComment);
+            }
+            _view.ExtendedInfoTvSerialWindowProperty.ListViewComments.ItemsSource = _currenTvSeriesTable.Comments.ToList();
+            MessageBox.Show("Comment deleted successfully!", "Done!");
         }
     }
 }
