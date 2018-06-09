@@ -11,6 +11,7 @@ namespace TVSeriesUserClientEntityFramework
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
+            Comments = new HashSet<Comment>();
             Ratings = new HashSet<Rating>();
             TVSeriesTables = new HashSet<TVSeriesTable>();
         }
@@ -29,6 +30,9 @@ namespace TVSeriesUserClientEntityFramework
         public DateTime? BirthDate { get; set; }
 
         public int? Id_Category { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Comment> Comments { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Rating> Ratings { get; set; }

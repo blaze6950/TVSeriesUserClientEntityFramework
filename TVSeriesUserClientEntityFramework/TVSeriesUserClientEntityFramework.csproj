@@ -65,26 +65,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Channel.cs" />
+    <Compile Include="Model\Comment.cs" />
     <Compile Include="ExtendedInfoTVSerialWindow.xaml.cs">
       <DependentUpon>ExtendedInfoTVSerialWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\Channel.cs" />
-    <Compile Include="Model\Comment.cs" />
     <Compile Include="Model\Genre.cs" />
-    <Compile Include="Model\Rating.cs" />
-    <Compile Include="Model\TVSeriesModel.cs" />
-    <Compile Include="Model\TVSeriesTable.cs" />
-    <Compile Include="Model\User.cs" />
     <Compile Include="Presenter\IPresenterExtendedInfoTVSerialWindow.cs" />
     <Compile Include="Presenter\IPresenterTVSeriesWindow.cs" />
     <Compile Include="Presenter\PresenterExtendedInfoTVSerialWindow.cs" />
     <Compile Include="Presenter\PresenterTVSeriesWindow.cs" />
+    <Compile Include="Model\Rating.cs" />
     <Compile Include="RatingUC.xaml.cs">
       <DependentUpon>RatingUC.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\TVSeriesModel.cs" />
+    <Compile Include="Model\TVSeriesTable.cs" />
     <Compile Include="TVSeriesWindow.xaml.cs">
       <DependentUpon>TVSeriesWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\User.cs" />
     <Compile Include="View\ITVSeriesWindow.cs" />
     <Compile Include="View\IViewExtendedInfoTVSerialWindow.cs" />
     <Compile Include="View\IViewMainWindow.cs" />
@@ -152,5 +152,6 @@
     <Resource Include="Images\MinusRate.png" />
     <Resource Include="Images\PlusRate.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

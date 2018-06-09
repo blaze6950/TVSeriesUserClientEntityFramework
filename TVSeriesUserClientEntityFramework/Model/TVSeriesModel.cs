@@ -7,7 +7,8 @@ namespace TVSeriesUserClientEntityFramework
 
     public partial class TVSeriesModel : DbContext
     {
-        public TVSeriesModel() : base("name=TVSeriesModelCS")
+        public TVSeriesModel()
+            : base("name=TVSeriesModelCS")
         {
         }
 
@@ -45,6 +46,11 @@ namespace TVSeriesUserClientEntityFramework
                 .HasMany(e => e.Users)
                 .WithMany(e => e.TVSeriesTables)
                 .Map(m => m.ToTable("UsersTVSeriesTable").MapLeftKey("Id_TVSerial").MapRightKey("Id_User"));
+
+            modelBuilder.Entity<User>()
+                .HasMany(e => e.Comments)
+                .WithRequired(e => e.User)
+                .HasForeignKey(e => e.Id_User);
 
             modelBuilder.Entity<User>()
                 .HasMany(e => e.Ratings)

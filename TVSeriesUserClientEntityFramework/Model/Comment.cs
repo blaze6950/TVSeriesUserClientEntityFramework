@@ -8,8 +8,14 @@ namespace TVSeriesUserClientEntityFramework
 
     public partial class Comment
     {
-        public int Id { get; set; }
+        [Key]
+        [Column(Order = 0)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int Id_User { get; set; }
 
+        [Key]
+        [Column(Order = 1)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id_TVSerial { get; set; }
 
         [Required]
@@ -17,5 +23,7 @@ namespace TVSeriesUserClientEntityFramework
         public string TextComment { get; set; }
 
         public virtual TVSeriesTable TVSeriesTable { get; set; }
+
+        public virtual User User { get; set; }
     }
 }

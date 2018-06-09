@@ -49,10 +49,24 @@
             <GroupBox Header="Rating:" DockPanel.Dock="Top">
                 <local:RatingUC x:Name="PickerRating"></local:RatingUC>
             </GroupBox>
-            <TextBox DockPanel.Dock="Top"></TextBox>
+            <TextBox DockPanel.Dock="Top" TextWrapping="WrapWithOverflow" Height="30"></TextBox>
             <Button DockPanel.Dock="Top">Send</Button>
-            <ListView>
-                
+            <ListView Name="ListViewComments">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Comments" Width="230">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Vertical">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding AverageRating}" TextAlignment="Center" FontSize="24" Width="150"></TextBlock>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
             </ListView>
         </DockPanel>
     </Grid>
