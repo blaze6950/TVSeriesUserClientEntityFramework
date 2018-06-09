@@ -31,7 +31,7 @@ namespace TVSeriesUserClientEntityFramework.Presenter
             _view.ExtendedInfoTvSerialWindowProperty.DescriptionTB.Text = _currenTvSeriesTable.Desription;
             _view.ExtendedInfoTvSerialWindowProperty.ChannelTB.Text = _currenTvSeriesTable.Channel.Name;
             _view.ExtendedInfoTvSerialWindowProperty.Image.Source = new BitmapImage(new Uri(_currenTvSeriesTable.Image));
-            _view.ExtendedInfoTvSerialWindowProperty.GenreTB.ItemsSource = _currenTvSeriesTable.Genres.ToList();
+            _view.ExtendedInfoTvSerialWindowProperty.GenreTB.ItemsSource = (from g in _currenTvSeriesTable.Genres select g.Name).ToList();
             _view.ExtendedInfoTvSerialWindowProperty.SeasonsTB.Text = _currenTvSeriesTable.Seasons.ToString();
             _view.ExtendedInfoTvSerialWindowProperty.YearTB.Text = _currenTvSeriesTable.YearOfIssue.ToString();
         }
