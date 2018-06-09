@@ -23,6 +23,9 @@ namespace TVSeriesUserClientEntityFramework
         int intRate = 0;
         int intCount = 1;
         int Rate = 0;
+        public TVSeriesTable tvSeriesTable;
+        public User currentUser;
+
         public RatingUC()
         {
             InitializeComponent();
@@ -100,13 +103,34 @@ namespace TVSeriesUserClientEntityFramework
         {
             GetRating(sender as Image);
             Rate = intRate;
-            lblRating.Text = intRate.ToString();
+            SetRating();
+            lblRating.Text = tvSeriesTable.AverageRating.ToString();
         }
 
         private void GetRating(Image Img)
         {
             string strImgName = Img.Name;
             intRate = Convert.ToInt32(strImgName.Substring(strImgName.Length - 1, 1));
+        }
+
+        private void SetRating()
+        {
+            var oldRating = tvSeriesTable.Ratings.DefaultIfEmpty(null).Single(r => r.Id_User == currentUser.id);
+            if (oldRating == null)
+            {
+                tvSeriesTable.Ratings.Add(new Rating()
+                {
+                    Id_TVSerial = tvSeriesTable.Id,
+                    Id_User = currentUser.id,
+                    Mark = Rate,
+                    TVSeriesTable = tvSeriesTable,
+                    User = currentUser
+                });
+            }
+            else
+            {
+                oldRating.Mark = Rate;
+            }
         }
     }
 }

@@ -75,7 +75,9 @@
     <Compile Include="Model\TVSeriesModel.cs" />
     <Compile Include="Model\TVSeriesTable.cs" />
     <Compile Include="Model\User.cs" />
+    <Compile Include="Presenter\IPresenterExtendedInfoTVSerialWindow.cs" />
     <Compile Include="Presenter\IPresenterTVSeriesWindow.cs" />
+    <Compile Include="Presenter\PresenterExtendedInfoTVSerialWindow.cs" />
     <Compile Include="Presenter\PresenterTVSeriesWindow.cs" />
     <Compile Include="RatingUC.xaml.cs">
       <DependentUpon>RatingUC.xaml</DependentUpon>
@@ -84,6 +86,7 @@
       <DependentUpon>TVSeriesWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ITVSeriesWindow.cs" />
+    <Compile Include="View\IViewExtendedInfoTVSerialWindow.cs" />
     <Compile Include="View\IViewMainWindow.cs" />
     <Page Include="ExtendedInfoTVSerialWindow.xaml">
       <SubType>Designer</SubType>

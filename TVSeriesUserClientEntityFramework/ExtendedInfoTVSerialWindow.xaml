@@ -47,7 +47,7 @@
         </Grid>
         <DockPanel Grid.Column="1" LastChildFill="True">
             <GroupBox Header="Rating:" DockPanel.Dock="Top">
-                <local:RatingUC></local:RatingUC>
+                <local:RatingUC x:Name="PickerRating"></local:RatingUC>
             </GroupBox>
             <TextBox DockPanel.Dock="Top"></TextBox>
             <Button DockPanel.Dock="Top">Send</Button>

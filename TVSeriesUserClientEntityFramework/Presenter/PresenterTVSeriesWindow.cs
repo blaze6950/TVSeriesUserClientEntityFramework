@@ -35,8 +35,9 @@ namespace TVSeriesUserClientEntityFramework.Presenter
 
         public void ListViewMouseDoubleClick(TVSeriesTable item)
         {
-            var extendedInfo = new ExtendedInfoTVSerialWindow();
+            var extendedInfo = new ExtendedInfoTVSerialWindow(_model, _currentUser, item);
             extendedInfo.ShowDialog();
+            _model.SaveChanges();
         }
     }
 }
