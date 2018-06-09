@@ -20,6 +20,9 @@ namespace TVSeriesUserClientEntityFramework
         [StringLength(100)]
         public string Name { get; set; }
 
+        [NotMapped]
+        public bool IsChecked { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TVSeriesTable> TVSeriesTables { get; set; }
     }

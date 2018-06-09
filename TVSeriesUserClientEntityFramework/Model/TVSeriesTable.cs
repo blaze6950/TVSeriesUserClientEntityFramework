@@ -45,7 +45,10 @@ namespace TVSeriesUserClientEntityFramework
             {
                 if (Ratings.Count > 0)
                 {
-                    return Ratings.AsQueryable().Average(r => r.Mark);
+                    double res = Ratings.AsQueryable().Average(r => r.Mark);
+                    int buf = (int)(res * 1000);
+                    res = buf / 1000.0;
+                    return res;
                 }
                 return 0;
             }

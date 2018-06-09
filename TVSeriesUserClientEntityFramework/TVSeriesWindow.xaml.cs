@@ -50,6 +50,79 @@ namespace TVSeriesUserClientEntityFramework
         public ListView AllListTvSeries { get => ListTvSeries; set => ListTvSeries = value; }
         public ComboBox FavouriteComboBoxFind { get => FavComboBoxFind; set => FavComboBoxFind = value; }
         public ListView FavouriteListTvSeries { get => FavListTvSeries; set => FavListTvSeries = value; }
+        public TVSeriesWindow TvSeriesWindow { get => this; }
+
+        private void CheckBoxFilter_StateChanged(object sender, RoutedEventArgs e)
+        {
+            _presenter.LoadList();
+        }
+
+        private void MenuItemFilters_Click(object sender, RoutedEventArgs e)
+        {
+            if (MenuItemFilters.IsChecked)
+            {
+                FiltersPanel.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                FiltersPanel.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void TextBoxStartYear_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (Int32.TryParse(TextBoxStartYear.Text, out var startYear))
+            {
+                if (Int32.TryParse(TextBoxEndYear.Text, out var endYear))
+                {
+                    if (startYear > endYear)
+                    {
+                        endYear = startYear;
+                        TextBoxEndYear.Text = endYear.ToString();
+                    }
+                }
+                else
+                {
+                    endYear = startYear;
+                    TextBoxEndYear.Text = endYear.ToString();
+                }
+                if (endYear > 1800 && startYear > 1800)
+                {
+                    _presenter.Year_Changed(endYear, startYear);
+                }
+            }
+        }
+
+        private void TextBoxEndYear_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (Int32.TryParse(TextBoxEndYear.Text, out var endYear))
+            {
+                if (Int32.TryParse(TextBoxStartYear.Text, out var startYear))
+                {
+                    if (startYear > endYear)
+                    {
+                        startYear = endYear;
+                        TextBoxStartYear.Text = startYear.ToString();
+                    }
+                }
+                else
+                {
+                    startYear = endYear;
+                    TextBoxStartYear.Text = startYear.ToString();
+                }
+                if (endYear > 1800 && startYear > 1800)
+                {
+                    _presenter.Year_Changed(startYear, endYear);
+                }
+            }
+        }
+
+        private void ButtonResetYearFilter_OnClick(object sender, RoutedEventArgs e)
+        {
+            TextBoxStartYear.Text = "";
+            TextBoxEndYear.Text = "";
+            _presenter.ResetYearFilter();
+        }
     }
 }
 

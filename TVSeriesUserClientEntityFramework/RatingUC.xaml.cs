@@ -70,6 +70,7 @@ namespace TVSeriesUserClientEntityFramework
                 lblRating.Text = TvSeriesTable.AverageRating.ToString();
                 SetImage(Rate, Visibility.Visible, Visibility.Hidden);
             }
+            lblRating.Text = TvSeriesTable.AverageRating.ToString();
         }
 
         private void LoadImages()
@@ -157,7 +158,7 @@ namespace TVSeriesUserClientEntityFramework
             Rating oldRating = null;
             if (TvSeriesTable.Ratings.Count > 0)
             {
-                oldRating = TvSeriesTable.Ratings.DefaultIfEmpty(null).Single(r => r.Id_User == CurrentUser.id);
+                oldRating = TvSeriesTable.Ratings.DefaultIfEmpty(null).SingleOrDefault(r => r.Id_User == CurrentUser.id);
             }
             if (oldRating == null)
             {
