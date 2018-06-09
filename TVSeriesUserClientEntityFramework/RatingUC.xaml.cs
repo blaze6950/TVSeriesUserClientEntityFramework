@@ -23,14 +23,52 @@ namespace TVSeriesUserClientEntityFramework
         int intRate = 0;
         int intCount = 1;
         int Rate = 0;
-        public TVSeriesTable tvSeriesTable;
-        public User currentUser;
+        private TVSeriesTable _tvSeriesTable;
+        private User _currentUser;
 
         public RatingUC()
         {
             InitializeComponent();
             LoadImages();
             lblRating.Text = intRate.ToString();
+        }
+
+        public User CurrentUser
+        {
+            get { return _currentUser; }
+            set
+            {
+                _currentUser = value;
+                if (_tvSeriesTable != null && _currentUser != null)
+                {
+                    LoadRating();
+                }
+            }
+        }
+
+        public TVSeriesTable TvSeriesTable
+        {
+            get { return _tvSeriesTable; }
+            set
+            {
+                _tvSeriesTable = value;
+                if (_tvSeriesTable != null && _currentUser != null)
+                {
+                    LoadRating();
+                }
+            }
+        }
+
+        private void LoadRating()
+        {
+            var oldRating = TvSeriesTable.Ratings.DefaultIfEmpty(null).Single(r => r.Id_User == CurrentUser.id);
+            if (oldRating != null)
+            {
+                Rate = oldRating.Mark;
+                intRate = Rate;
+                SetRating();
+                lblRating.Text = TvSeriesTable.AverageRating.ToString();
+            }
         }
 
         private void LoadImages()
@@ -104,7 +142,7 @@ namespace TVSeriesUserClientEntityFramework
             GetRating(sender as Image);
             Rate = intRate;
             SetRating();
-            lblRating.Text = tvSeriesTable.AverageRating.ToString();
+            lblRating.Text = TvSeriesTable.AverageRating.ToString();
         }
 
         private void GetRating(Image Img)
@@ -115,16 +153,16 @@ namespace TVSeriesUserClientEntityFramework
 
         private void SetRating()
         {
-            var oldRating = tvSeriesTable.Ratings.DefaultIfEmpty(null).Single(r => r.Id_User == currentUser.id);
+            var oldRating = TvSeriesTable.Ratings.DefaultIfEmpty(null).Single(r => r.Id_User == CurrentUser.id);
             if (oldRating == null)
             {
-                tvSeriesTable.Ratings.Add(new Rating()
+                TvSeriesTable.Ratings.Add(new Rating()
                 {
-                    Id_TVSerial = tvSeriesTable.Id,
-                    Id_User = currentUser.id,
+                    Id_TVSerial = TvSeriesTable.Id,
+                    Id_User = CurrentUser.id,
                     Mark = Rate,
-                    TVSeriesTable = tvSeriesTable,
-                    User = currentUser
+                    TVSeriesTable = TvSeriesTable,
+                    User = CurrentUser
                 });
             }
             else

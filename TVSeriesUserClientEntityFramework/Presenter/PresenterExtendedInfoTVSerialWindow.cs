@@ -16,8 +16,8 @@ namespace TVSeriesUserClientEntityFramework.Presenter
             _View = view;
             _currenTvSeriesTable = currenTvSeriesTable;
 
-            _View.ExtendedInfoTvSerialWindowProperty.PickerRating.tvSeriesTable = _currenTvSeriesTable;
-            _View.ExtendedInfoTvSerialWindowProperty.PickerRating.currentUser = _currentUser;
+            _View.ExtendedInfoTvSerialWindowProperty.PickerRating.TvSeriesTable = _currenTvSeriesTable;
+            _View.ExtendedInfoTvSerialWindowProperty.PickerRating.CurrentUser = _currentUser;
 
             LoadData();
         }
