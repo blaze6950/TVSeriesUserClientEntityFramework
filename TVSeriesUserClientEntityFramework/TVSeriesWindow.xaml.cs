@@ -59,14 +59,19 @@ namespace TVSeriesUserClientEntityFramework
 
         private void MenuItemFilters_Click(object sender, RoutedEventArgs e)
         {
-            if (MenuItemFilters.IsChecked)
+            bool res = ((MenuItem) sender).IsChecked;
+            if (res)
             {
                 FiltersPanel.Visibility = Visibility.Visible;
+                FiltersPanelFav.Visibility = Visibility.Visible;
             }
             else
             {
                 FiltersPanel.Visibility = Visibility.Collapsed;
+                FiltersPanelFav.Visibility = Visibility.Collapsed;
             }
+            MenuItemFilters.IsChecked = res;
+            MenuItemFiltersFav.IsChecked = res;
         }
 
         private void TextBoxStartYear_OnTextChanged(object sender, TextChangedEventArgs e)
@@ -122,18 +127,6 @@ namespace TVSeriesUserClientEntityFramework
             TextBoxStartYear.Text = "";
             TextBoxEndYear.Text = "";
             _presenter.ResetYearFilter();
-        }
-
-        private void MenuItemFiltersFav_Click(object sender, RoutedEventArgs e)
-        {
-            if (MenuItemFilters.IsChecked)
-            {
-                FiltersPanelFav.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                FiltersPanelFav.Visibility = Visibility.Collapsed;
-            }
         }
 
         private void CheckBoxFilterFav_StateChanged(object sender, RoutedEventArgs e)

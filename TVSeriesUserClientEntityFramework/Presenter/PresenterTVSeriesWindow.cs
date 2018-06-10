@@ -28,62 +28,64 @@ namespace TVSeriesUserClientEntityFramework.Presenter
             _view.TvSeriesWindow.ListBoxGenres.ItemsSource = (from g in _model.Genres select g).DefaultIfEmpty(null).ToList();
             _view.TvSeriesWindow.ListBoxChannels.ItemsSource =
                 (from c in _model.Channels select c).DefaultIfEmpty(null).ToList();
+            _view.TvSeriesWindow.ListBoxGenresFav.ItemsSource = (from g in _model.Genres select g).DefaultIfEmpty(null).ToList();
+            _view.TvSeriesWindow.ListBoxChannelsFav.ItemsSource =
+                (from c in _model.Channels select c).DefaultIfEmpty(null).ToList();
         }
 
         public void LoadList()
         {
             List<TVSeriesTable> newList = null;
-            bool isAnyoneFilter = false;
 
+            List<TVSeriesTable> genreList = null;
             foreach (Genre genre in _view.TvSeriesWindow.ListBoxGenres.ItemsSource)
             {
                 if (genre.IsChecked)
                 {
-                    if (newList == null)
+                    if (genreList == null)
                     {
-                        newList =
+                        genreList =
                             (from tv in _model.TVSeriesTables from g in tv.Genres where g.Id == genre.Id select tv)
                             .ToList();
-                        isAnyoneFilter = true;
                     }
                     else
                     {
-                        newList.AddRange((from tv in _model.TVSeriesTables from g in tv.Genres where g.Id == genre.Id select tv).ToList());
-                        isAnyoneFilter = true;
+                        genreList.AddRange((from tv in _model.TVSeriesTables from g in tv.Genres where g.Id == genre.Id select tv).ToList());
                     }
                 }
             }
 
-            if (!isAnyoneFilter)
+            List<TVSeriesTable> channelList = null;
+            foreach (Channel channel in _view.TvSeriesWindow.ListBoxChannels.ItemsSource)
             {
-                newList = (from tv in _model.TVSeriesTables select tv).ToList();
-            }
-
-            List<TVSeriesTable> bufList = null;
-            if (newList != null)
-            {
-                foreach (Channel channel in _view.TvSeriesWindow.ListBoxChannels.ItemsSource)
+                if (channel.IsChecked)
                 {
-                    if (channel.IsChecked)
+                    if (channelList == null)
                     {
-                        if (bufList == null)
-                        {
-                            bufList = (from tv in newList where tv.Channel.Id == channel.Id select tv).ToList();
-                            isAnyoneFilter = true;
-                        }
-                        else
-                        {
-                            bufList.AddRange((from tv in newList where tv.Channel.Id == channel.Id select tv).ToList());
-                            isAnyoneFilter = true;
-                        }
+                        channelList = (from tv in _model.TVSeriesTables where tv.Channel.Id == channel.Id select tv).ToList();
+                    }
+                    else
+                    {
+                        channelList.AddRange((from tv in _model.TVSeriesTables where tv.Channel.Id == channel.Id select tv).ToList());
                     }
                 }
             }
-            newList = bufList;
 
-            if (!isAnyoneFilter)
+            if (genreList != null && channelList != null)
+            {
+                newList = genreList.Intersect(channelList).ToList();
+            }
+            else if (genreList == null && channelList == null)
             {
                 newList = (from tv in _model.TVSeriesTables select tv).ToList();
+
+            }else if (genreList != null && channelList == null)
+            {
+                newList = genreList;
+            }
+            else
+            {
+                newList = channelList;
             }
 
             if (newList != null)
@@ -93,11 +95,6 @@ namespace TVSeriesUserClientEntityFramework.Presenter
                            select tv).ToList();
             }
 
-            if (!isAnyoneFilter)
-            {
-                newList = (from tv in _model.TVSeriesTables select tv).ToList();
-            }
-
             if (newList != null)
             {
                 if (_view.AllComboBoxFind.Text.Length > 0)
@@ -105,13 +102,7 @@ namespace TVSeriesUserClientEntityFramework.Presenter
                     newList = (from tv in newList
                                where tv.Name.Contains(_view.AllComboBoxFind.Text)
                                select tv).ToList();
-                    isAnyoneFilter = true;
                 }
-            }
-
-            if (!isAnyoneFilter && _startYear == 0 && _endYear == 2050)
-            {
-                newList = (from tv in _model.TVSeriesTables select tv).ToList();
             }
 
             _view.AllListTvSeries.ItemsSource = newList;
@@ -153,85 +144,74 @@ namespace TVSeriesUserClientEntityFramework.Presenter
         public void LoadListFav()
         {
             List<TVSeriesTable> newList = null;
-            bool isAnyoneFilter = false;
 
+            List<TVSeriesTable> genreList = null;
             foreach (Genre genre in _view.TvSeriesWindow.ListBoxGenresFav.ItemsSource)
             {
                 if (genre.IsChecked)
                 {
-                    if (newList == null)
+                    if (genreList == null)
                     {
-                        newList =
+                        genreList =
                             (from tv in _currentUser.TVSeriesTables from g in tv.Genres where g.Id == genre.Id select tv)
                             .ToList();
-                        isAnyoneFilter = true;
                     }
                     else
                     {
-                        newList.AddRange((from tv in _currentUser.TVSeriesTables from g in tv.Genres where g.Id == genre.Id select tv).ToList());
-                        isAnyoneFilter = true;
+                        genreList.AddRange((from tv in _currentUser.TVSeriesTables from g in tv.Genres where g.Id == genre.Id select tv).ToList());
                     }
                 }
             }
 
-            if (!isAnyoneFilter)
+            List<TVSeriesTable> channelList = null;
+            foreach (Channel channel in _view.TvSeriesWindow.ListBoxChannelsFav.ItemsSource)
             {
-                newList = (from tv in _currentUser.TVSeriesTables select tv).ToList();
-            }
-
-            List<TVSeriesTable> bufList = null;
-            if (newList != null)
-            {
-                foreach (Channel channel in _view.TvSeriesWindow.ListBoxChannelsFav.ItemsSource)
+                if (channel.IsChecked)
                 {
-                    if (channel.IsChecked)
+                    if (channelList == null)
                     {
-                        if (bufList == null)
-                        {
-                            bufList = (from tv in newList where tv.Channel.Id == channel.Id select tv).ToList();
-                            isAnyoneFilter = true;
-                        }
-                        else
-                        {
-                            bufList.AddRange((from tv in newList where tv.Channel.Id == channel.Id select tv).ToList());
-                            isAnyoneFilter = true;
-                        }
+                        channelList = (from tv in _currentUser.TVSeriesTables where tv.Channel.Id == channel.Id select tv).ToList();
+                    }
+                    else
+                    {
+                        channelList.AddRange((from tv in _currentUser.TVSeriesTables where tv.Channel.Id == channel.Id select tv).ToList());
                     }
                 }
             }
-            newList = bufList;
 
-            if (!isAnyoneFilter)
+            if (genreList != null && channelList != null)
+            {
+                newList = genreList.Intersect(channelList).ToList();
+            }
+            else if (genreList == null && channelList == null)
             {
                 newList = (from tv in _currentUser.TVSeriesTables select tv).ToList();
+
+            }
+            else if (genreList != null && channelList == null)
+            {
+                newList = genreList;
+            }
+            else
+            {
+                newList = channelList;
             }
 
             if (newList != null)
             {
                 newList = (from tv in newList
-                           where tv.YearOfIssue >= _startYearFav && tv.YearOfIssue <= _endYearFav
+                           where tv.YearOfIssue >= _startYear && tv.YearOfIssue <= _endYear
                            select tv).ToList();
-            }
-
-            if (!isAnyoneFilter)
-            {
-                newList = (from tv in _currentUser.TVSeriesTables select tv).ToList();
             }
 
             if (newList != null)
             {
-                if (_view.FavouriteComboBoxFind.Text.Length > 0)
+                if (_view.AllComboBoxFind.Text.Length > 0)
                 {
                     newList = (from tv in newList
-                               where tv.Name.Contains(_view.FavouriteComboBoxFind.Text)
+                               where tv.Name.Contains(_view.AllComboBoxFind.Text)
                                select tv).ToList();
-                    isAnyoneFilter = true;
                 }
-            }
-
-            if (!isAnyoneFilter && _startYear == 0 && _endYear == 2050)
-            {
-                newList = (from tv in _currentUser.TVSeriesTables select tv).ToList();
             }
 
             _view.FavouriteListTvSeries.ItemsSource = newList;
