@@ -113,5 +113,30 @@ namespace TVSeriesUserClientEntityFramework.Presenter
             _endYear = 2050;
             LoadList();
         }
+
+        public void LoadListFav()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void YearFav_Changed(int startYear, int endYear)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void FavComboBoxFind_TextInput(string findText)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void ButtonFavFind_Click()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void FavListViewMouseDoubleClick(TVSeriesTable item)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

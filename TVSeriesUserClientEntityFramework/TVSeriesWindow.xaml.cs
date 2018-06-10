@@ -123,6 +123,89 @@ namespace TVSeriesUserClientEntityFramework
             TextBoxEndYear.Text = "";
             _presenter.ResetYearFilter();
         }
+
+        private void MenuItemFiltersFav_Click(object sender, RoutedEventArgs e)
+        {
+            if (MenuItemFilters.IsChecked)
+            {
+                FiltersPanelFav.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                FiltersPanelFav.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void CheckBoxFilterFav_StateChanged(object sender, RoutedEventArgs e)
+        {
+            _presenter.LoadListFav();
+        }
+
+        private void TextBoxStartYearFav_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (Int32.TryParse(TextBoxStartYearFav.Text, out var startYear))
+            {
+                if (Int32.TryParse(TextBoxEndYearFav.Text, out var endYear))
+                {
+                    if (startYear > endYear)
+                    {
+                        endYear = startYear;
+                        TextBoxEndYearFav.Text = endYear.ToString();
+                    }
+                }
+                else
+                {
+                    endYear = startYear;
+                    TextBoxEndYearFav.Text = endYear.ToString();
+                }
+                if (endYear > 1800 && startYear > 1800)
+                {
+                    _presenter.YearFav_Changed(endYear, startYear);
+                }
+            }
+        }
+
+        private void TextBoxEndYearFav_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (Int32.TryParse(TextBoxEndYearFav.Text, out var endYear))
+            {
+                if (Int32.TryParse(TextBoxStartYearFav.Text, out var startYear))
+                {
+                    if (startYear > endYear)
+                    {
+                        startYear = endYear;
+                        TextBoxStartYearFav.Text = startYear.ToString();
+                    }
+                }
+                else
+                {
+                    startYear = endYear;
+                    TextBoxStartYearFav.Text = startYear.ToString();
+                }
+                if (endYear > 1800 && startYear > 1800)
+                {
+                    _presenter.YearFav_Changed(startYear, endYear);
+                }
+            }
+        }
+
+        private void FavComboBoxFind_TextInput(object sender, KeyEventArgs e)
+        {
+            if (FavComboBoxFind.Text.Length > 0)
+            {
+                _presenter.FavComboBoxFind_TextInput(FavComboBoxFind.Text);
+            }
+        }
+
+        private void ButtonFindFav_Click(object sender, RoutedEventArgs e)
+        {
+            _presenter.ButtonFavFind_Click();
+        }
+
+        private void FavMyListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            _presenter.FavListViewMouseDoubleClick((TVSeriesTable)FavListTvSeries.SelectedItem);
+        }
     }
 }
 

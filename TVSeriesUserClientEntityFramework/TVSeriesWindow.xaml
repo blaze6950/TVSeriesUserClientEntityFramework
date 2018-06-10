@@ -134,60 +134,113 @@
                     </StackPanel>
                 </TabItem.Header>
                 <TabItem.Content>
-                    <Grid Grid.Row="1" Grid.Column="1" Name="FavGridTVSeriesPanel">
+                    <Grid Name="GridFav">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="6*"/>
+                        </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="7*"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
-                        <Grid Grid.Row="0" Margin="5" Background="#FFE2E2E2">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="5*"></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <ComboBox FontSize="22" Margin="5" IsEditable="True" Grid.Column="0" Name="FavComboBoxFind" KeyUp="AllComboBoxFind_TextInput" IsTextSearchEnabled="False" IsSynchronizedWithCurrentItem="False"></ComboBox>
-                            <Button Margin="5" Grid.Column="1" Click="AllButtonFind_Click">Find</Button>
-                        </Grid>
-                        <ListView Name="FavListTvSeries" Margin="5" Grid.Row="1" MouseDoubleClick="AllMyListView_MouseDoubleClick">
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn Header="Image" Width="110">
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <Image Source="{Binding Image}" Stretch="UniformToFill" Width="100" Height="100" HorizontalAlignment="Center" VerticalAlignment="Center"></Image>
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
-                                    <GridViewColumn Header="Name" Width="200">
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding Name}" TextAlignment="Center" FontSize="24" Width="200"></TextBlock>
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
-                                    <GridViewColumn Header="Year" Width="150">
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding Year}" TextAlignment="Center" FontSize="24" Width="150"></TextBlock>
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
-                                    <GridViewColumn Header="Channel" Width="150">
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding Channel.Name}" TextAlignment="Center" FontSize="24" Width="150"></TextBlock>
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
-                                    <GridViewColumn Header="Rating" Width="150">
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding AverageRating}" TextAlignment="Center" FontSize="24" Width="150"></TextBlock>
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
+
+                        <Menu Grid.Row="0" Background="#FFE2E2E2" Grid.ColumnSpan="2" Margin="0,0,0,36">
+                            <MenuItem Name="MenuItemFiltersFav" Margin="5" Header="Filters" IsCheckable="True" IsChecked="True" Click="MenuItemFiltersFav_Click"></MenuItem>
+                        </Menu>
+
+                        <DockPanel Grid.Column="0" Grid.Row="0" LastChildFill="True" Grid.ColumnSpan="2" Margin="0,28,0,0" Grid.RowSpan="2">
+                            <ScrollViewer Name="FiltersPanelFav">
+                                <StackPanel Orientation="Vertical" Margin="5" Background="#FFE2E2E2">
+                                    <GroupBox Header="Genres" Margin="5">
+                                        <ListBox Name="ListBoxGenresFav">
+                                            <ListBox.ItemTemplate>
+                                                <HierarchicalDataTemplate>
+                                                    <CheckBox Content="{Binding Name}" IsChecked="{Binding IsChecked}" Checked="CheckBoxFilterFav_StateChanged" Unchecked="CheckBoxFilterFav_StateChanged"/>
+                                                </HierarchicalDataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
+                                    </GroupBox>
+                                    <GroupBox Header="Channels" Margin="5">
+                                        <ListBox Name="ListBoxChannelsFav">
+                                            <ListBox.ItemTemplate>
+                                                <HierarchicalDataTemplate>
+                                                    <CheckBox Content="{Binding Name}" IsChecked="{Binding IsChecked}" Checked="CheckBoxFilterFav_StateChanged" Unchecked="CheckBoxFilterFav_StateChanged"/>
+                                                </HierarchicalDataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
+                                    </GroupBox>
+                                    <GroupBox Header="Years" Margin="5">
+                                        <StackPanel Orientation="Vertical">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition></ColumnDefinition>
+                                                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                                                    <ColumnDefinition></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBox Grid.Column="0" Name="TextBoxStartYearFav" TextChanged="TextBoxStartYearFav_OnTextChanged"></TextBox>
+                                                <Button Grid.Column="1" Click="ButtonResetYearFilter_OnClick">-</Button>
+                                                <TextBox Grid.Column="2" Name="TextBoxEndYearFav" TextChanged="TextBoxEndYearFav_OnTextChanged"></TextBox>
+                                            </Grid>
+                                        </StackPanel>
+                                    </GroupBox>
+                                </StackPanel>
+                            </ScrollViewer>
+                            <Grid Grid.Row="1" Grid.Column="1" Name="FavGridTVSeriesPanel">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="7*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0" Margin="5" Background="#FFE2E2E2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="5*"></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <ComboBox FontSize="22" Margin="5" IsEditable="True" Grid.Column="0" Name="FavComboBoxFind" KeyUp="FavComboBoxFind_TextInput" IsTextSearchEnabled="False" IsSynchronizedWithCurrentItem="False"></ComboBox>
+                                    <Button Margin="5" Grid.Column="1" Click="ButtonFindFav_Click">Find</Button>
+                                </Grid>
+                                <ListView Name="FavListTvSeries" Margin="5" Grid.Row="1" MouseDoubleClick="FavMyListView_MouseDoubleClick">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn Header="Image" Width="110">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <Image Source="{Binding Image}" Stretch="UniformToFill" Width="100" Height="100" HorizontalAlignment="Center" VerticalAlignment="Center"></Image>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn Header="Name" Width="200">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding Name}" TextAlignment="Center" FontSize="24" Width="200"></TextBlock>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn Header="Year" Width="150">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding Year}" TextAlignment="Center" FontSize="24" Width="150"></TextBlock>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn Header="Channel" Width="150">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding Channel.Name}" TextAlignment="Center" FontSize="24" Width="150"></TextBlock>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn Header="Rating" Width="150">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding AverageRating}" TextAlignment="Center" FontSize="24" Width="150"></TextBlock>
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                            </Grid>
+                        </DockPanel>
                     </Grid>
                 </TabItem.Content>
             </TabItem>
