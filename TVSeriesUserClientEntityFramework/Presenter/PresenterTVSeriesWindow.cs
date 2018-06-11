@@ -209,7 +209,7 @@ namespace TVSeriesUserClientEntityFramework.Presenter
                 if (_view.AllComboBoxFind.Text.Length > 0)
                 {
                     newList = (from tv in newList
-                               where tv.Name.Contains(_view.AllComboBoxFind.Text)
+                               where tv.Name.Contains(_view.FavouriteComboBoxFind.Text)
                                select tv).ToList();
                 }
             }
